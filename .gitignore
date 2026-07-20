@@ -11,4 +11,5 @@ dist/
 .pytest_cache/
 .ruff_cache/
 
-data/TODO.md
+data/
+TODO.md

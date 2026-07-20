@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "boq "
+version = "0.1.0"
+description = "Bill of Quantities "
+authors = ["Kasweka Michael Mukoko <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.2"
+python-decouple = "^3.8"
+psycopg2-binary = "^2.9"
+django-crispy-forms = "^2.3"
+crispy-bootstrap5 = "^2024.10"
+whitenoise = "^6.7"
+gunicorn = "^23.0"
+celery = "^5.6.3"
+openpyxl = "^3.1.5"
+weasyprint = "^69.0"
+
+[tool.poetry.group.dev.dependencies]
+factory-boy = "^3.3"
+pytest = "^8.3"
+pytest-django = "^4.9"
+black = "^24.10"
+ruff = "^0.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.local"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]

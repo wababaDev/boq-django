@@ -1,0 +1,32 @@
+{% extends "template_base.html" %}
+{% load humanize %}
+{% block page_title %}Projects{% endblock %}
+{% block breadcrumb %}Projects{% endblock %}
+
+{% block content %}
+<div class="card custom-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-title">Projects</div>
+        <a href="{% url 'boq:project_create' %}" class="btn btn-primary btn-sm">+ New project</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr><th>Name</th><th>Client</th><th>Total</th><th></th></tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.client_name }}</td>
+                    <td>ZMW {{ project.grand_total|floatformat:2|intcomma }}</td>
+                    <td><a href="{% url 'boq:project_detail' project.pk %}" class="btn btn-sm btn-outline-primary">Open</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center text-muted">No projects yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

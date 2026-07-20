@@ -1,0 +1,14 @@
+{% extends "template_base.html" %}
+{% block page_title %}Delete item{% endblock %}
+{% block content %}
+<div class="card custom-card">
+    <div class="card-body">
+        <p>Delete "{{ object.description|truncatewords:15 }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'boq:project_detail' object.project.pk %}" class="btn btn-outline-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
+
+<head>
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}BoQ Prototype{% endblock %}</title>
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+	<meta name="keywords" content="admin dashboard,dashboard design htmlbootstrap admin template,html admin panel,admin dashboard html,admin panel html template,bootstrap dashboard,html admin template,html dashboard,html admin dashboard template,bootstrap dashboard template,dashboard html template,bootstrap admin panel,dashboard admin bootstrap,bootstrap admin dashboard">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'assets/images/brand-logos/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Choices JS -->
+    <script src="{% static 'assets/libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+    <!-- Main Theme Js -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <!-- Bootstrap Css -->
+    <link id="style" href="{% static 'assets/libs/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >
+
+    <!-- Style Css -->
+    <link href="{% static 'assets/css/styles.min.css' %}" rel="stylesheet" >
+
+    <!-- Icons Css -->
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" >
+
+    <!-- Node Waves Css -->
+    <link href="{% static 'assets/libs/node-waves/waves.min.css' %}" rel="stylesheet" >
+
+    <!-- Simplebar Css -->
+    <link href="{% static 'assets/libs/simplebar/simplebar.min.css' %}" rel="stylesheet" >
+
+    <!-- Color Picker Css -->
+    <link rel="stylesheet" href="{% static 'assets/libs/flatpickr/flatpickr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/libs/@simonwep/pickr/themes/nano.min.css' %}">
+
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{% static 'assets/libs/choices.js/public/assets/styles/choices.min.css' %}">
+
+ <!-- Jsvector Css -->
+<link rel="stylesheet" href="{% static 'assets/libs/jsvectormap/css/jsvectormap.min.css' %}">
+
+ <!-- Swiper Css -->
+<link rel="stylesheet" href="{% static 'assets/libs/swiper/swiper-bundle.min.css' %}">
+
+ <!-- Grid Css -->
+<link rel="stylesheet" href="{% static 'assets/libs/gridjs/theme/mermaid.min.css' %}">
+    <style>
+    .header-logo img {
+    max-height: 36px;
+    width: auto;
+}
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Loader -->
+    <div id="loader" >
+        <img src="../assets/images/media/loader.svg" alt="">
+    </div>
+    <!-- Loader -->
+
+    <div class="page">
+         <!-- app-header -->
+         <header class="app-header">
+{% include "partials/top_nav.html" %}
+        </header>
+        <!-- /app-header -->
+        <!-- Start::app-sidebar -->
+   {%  include "partials/side_nav.html"  %}
+        <!-- End::app-sidebar -->
+
+        <!-- Start::app-content -->
+    <div class="main-content app-content">
+    <div class="container-fluid">
+        <div class="page-header">
+          <h1 class="page-title my-auto">{% block page_title %}Dashboard{% endblock %}</h1>
+          <div>
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="{% url 'base:dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{% block breadcrumb %}Dashboard{% endblock %}</li>
+            </ol>
+          </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+        <!-- End::app-content -->
+
+
+
+      {% include "partials/footer.html" %}
+
+    </div>
+
+    
+    <!-- Scroll To Top -->
+    <div class="scrollToTop">
+        <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+    <!-- Scroll To Top -->
+
+    <!-- Popper JS -->
+    <script src="{% static 'assets/libs/@popperjs/core/umd/popper.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{% static 'assets/js/defaultmenu.min.js' %}"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+
+    <!-- Sticky JS -->
+    <script src="{% static 'assets/js/sticky.js' %}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+
+    <!-- Color Picker JS -->
+    <script src="{% static 'assets/libs/@simonwep/pickr/pickr.es5.min.js' %}"></script>
+
+
+
+    <!-- JSVector Maps JS -->
+    <script src="{% static 'assets/libs/jsvectormap/js/jsvectormap.min.js' %}"></script>
+
+    <!-- JSVector Maps MapsJS -->
+    <script src="{% static 'assets/libs/jsvectormap/maps/world-merc.js' %}"></script>
+
+    <!-- Apex Charts JS -->
+    <script src="{% static 'assets/libs/apexcharts/apexcharts.min.js' %}"></script>
+
+    <!-- Chartjs Chart JS -->
+    <script src="{% static 'assets/libs/chart.js/chart.min.js' %}"></script>
+
+    <!-- index -->
+    <script src="{% static 'assets/js/index.js' %}"></script>
+
+    
+    <!-- Custom-Switcher JS -->
+    <script src="{% static 'assets/js/custom-switcher.min.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+</body>
+
+</html>

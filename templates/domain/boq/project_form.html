@@ -1,0 +1,16 @@
+{% extends "template_base.html" %}
+{% load crispy_forms_tags %}
+{% block page_title %}New project{% endblock %}
+{% block breadcrumb %}New project{% endblock %}
+
+{% block content %}
+<div class="card custom-card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Create project</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

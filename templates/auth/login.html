@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BoQ Prototype</title>
+    <link href="{% static 'assets/libs/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/styles.min.css' %}" rel="stylesheet">
+
+    <style>
+    input[type="text"], input[type="password"] { 
+        width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; 
+    }
+    .login-logo {
+        display: block;
+        max-height: 60px;
+        width: auto;
+        margin: 0 auto 16px auto;
+    }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center" style="min-height: 100vh; background: #f5f5f5;">
+
+<div class="card custom-card" style="width: 100%; max-width: 380px;">
+    <div class="card-body">
+        <img src="{% static 'assets/images/brand-logos/boq_icon_only.png' %}" alt="BoQ logo" class="login-logo">
+        <h4 class="mb-3 text-center">BoQ Prototype</h4>
+
+        {% if form.errors %}
+        <div class="alert alert-danger">Invalid username or password.</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Log in</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

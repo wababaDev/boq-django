@@ -1,0 +1,54 @@
+{% extends "template_base.html" %}
+{% load humanize %}
+{% block page_title %}Dashboard{% endblock %}
+{% block breadcrumb %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card custom-card">
+            <div class="card-body text-center">
+                <h2 class="mb-0">{{ project_count }}</h2>
+                <span class="text-muted">Projects</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card custom-card">
+            <div class="card-body text-center">
+                <h2 class="mb-0">ZMW {{ total_value|floatformat:2|intcomma }}</h2>
+                <span class="text-muted">Total value across projects</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card custom-card">
+            <div class="card-body text-center">
+                <h2 class="mb-0">{{ catalog_item_count }}</h2>
+                <span class="text-muted">Catalog items available</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card custom-card mt-3">
+    <div class="card-header"><div class="card-title">Recent projects</div></div>
+    <div class="card-body p-0">
+        <table class="table mb-0">
+            <thead><tr><th>Name</th><th>Client</th><th>Total</th><th></th></tr></thead>
+            <tbody>
+                {% for project in recent_projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.client_name }}</td>
+                    <td>ZMW {{ project.grand_total|floatformat:2|intcomma }}</td>
+                    <td><a href="{% url 'boq:project_detail' project.pk %}" class="btn btn-sm btn-outline-primary">Open</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center text-muted">No projects yet — <a href="{% url 'boq:project_create' %}">create one</a> to get started.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

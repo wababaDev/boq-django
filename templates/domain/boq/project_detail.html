@@ -1,0 +1,91 @@
+{% extends "template_base.html" %}
+{% load boq_extras humanize %}
+{% block page_title %}{{ project.name }}{% endblock %}
+{% block breadcrumb %}{{ project.name }}{% endblock %}
+
+{% block content %}
+<div class="card custom-card mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+            <p class="mb-0"><strong>Client:</strong> {{ project.client_name }}</p>
+            <p class="mb-0"><strong>Location:</strong> {{ project.location }}</p>
+        </div>
+        <div class="text-end">
+            <a href="{% url 'boq:bill_item_add' project.pk %}" class="btn btn-primary btn-sm">+ Add custom item</a>
+            <a href="{% url 'catalog:item_list' %}?project={{ project.pk }}" class="btn btn-outline-primary btn-sm">Browse catalog</a>
+            <a href="{% url 'boq:project_export_pdf' project.pk %}" target="_blank" class="btn btn-success btn-sm">Preview PDF</a>
+    </div>
+</div>
+
+{% regroup project.bill_items.all by trade as trade_list %}
+{% for trade_group in trade_list %}
+<div class="card custom-card mb-3">
+    <div class="card-header"><div class="card-title">{{ trade_group.grouper.name }}</div></div>
+    <div class="card-body p-0">
+        <table class="table mb-0" style="table-layout: fixed;">
+            <colgroup>
+                <col style="width: 45%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 13%;">
+                <col style="width: 12%;">
+                <col style="width: 10%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Unit</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in trade_group.list %}
+                <tr>
+                    <td style="word-wrap: break-word;">{{ item.description }}</td>
+                    <td>{{ item.unit }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>ZMW {{ item.rate|floatformat:2|intcomma }}</td>
+                    <td>ZMW {{ item.amount|floatformat:2|intcomma }}</td>
+                    <td>
+                        <a href="{% url 'boq:bill_item_edit' item.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a href="{% url 'boq:bill_item_delete' item.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <strong>{{ trade_group.grouper.name }} subtotal</strong>
+        <strong>ZMW {{ trade_group.list|trade_subtotal|floatformat:2|intcomma }}</strong>
+    </div>
+</div>
+{% endfor %}
+
+<div class="card custom-card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <span>Items total</span>
+            <span>ZMW {{ project.items_total|floatformat:2|intcomma }}</span>
+        </div>
+        {% if project.management_fee_percent %}
+        <div class="d-flex justify-content-between">
+            <span>Management fee ({{ project.management_fee_percent }}%)</span>
+            <span>ZMW {{ project.management_fee_amount|floatformat:2|intcomma }}</span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span>VAT on management fee ({{ project.vat_percent }}%)</span>
+            <span>ZMW {{ project.vat_amount|floatformat:2|intcomma }}</span>
+        </div>
+        <hr>
+        {% endif %}
+        <div class="d-flex justify-content-between">
+            <strong>Grand total</strong>
+            <strong>ZMW {{ project.grand_total|floatformat:2|intcomma }}</strong>
+        </div>
+    </div>
+</div>
+{% endblock %}
